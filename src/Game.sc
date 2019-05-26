@@ -26,6 +26,8 @@
 			6
 			(if param1 {SAVE GAME} else {GAME})
 			@temp41
+			(if param1 {¼®ÊÜÁÜ¦»¶} else {·Ü®Ï})
+			@temp41
 		)
 		(if
 			(==
@@ -36,17 +38,17 @@
 							33
 							0
 							81
-							{OK}
+							{OK%jµ¯¹°}
 							1
 							81
-							{Cancel}
+							{Cancel%j ·¬Ý¾Ù}
 							0
 							81
-							{Change Directory}
+							{Change Directory%j ÃÞ¨Ú¸ÄØ ¦ ¶´Ù}
 							2
 						)
 					else
-						(proc255_0 @temp81 33 0 81 {OK} 1)
+						(proc255_0 @temp81 33 0 81 {OK%j µ¯¹°} 1)
 					)
 				)
 				2
@@ -100,6 +102,8 @@
 (class Game of Obj
 	(properties
 		script 0
+		printLang 1
+		subtitleLang 81
 	)
 	
 	(method (init &tmp theMotion)
@@ -228,7 +232,7 @@
 					(gCast eachElementDo: #delete)
 					(RestoreGame name temp20 global28)
 				else
-					(proc255_0 994 1 33 0 81 {OK} 1)
+					(proc255_0 994 1 33 0 81 {OK%jµ¯¹°} 1)
 					(self setCursor: temp21 (HaveMouse))
 				)
 			)
@@ -245,7 +249,7 @@
 			(if (!= (= temp20 (Save doit: @temp0)) -1)
 				(= temp21 (self setCursor: global21 1))
 				(if (not (SaveGame name temp20 @temp0 global28))
-					(proc255_0 994 0 33 0 81 {OK} 1)
+					(proc255_0 994 0 33 0 81 {OK%jµ¯¹°} 1)
 				)
 				(self setCursor: temp21 (HaveMouse))
 			)
@@ -273,7 +277,7 @@
 	
 	(method (showMem)
 		(proc255_4
-			{Free Heap: %u Bytes\nLargest ptr: %u Bytes\nFreeHunk: %u KBytes\nLargest hunk: %u Bytes}
+			{Free Heap: %u Bytes\nLargest ptr: %u Bytes\nFreeHunk: %u KBytes\nLargest hunk: %u Bytes%jFree Heap: %u Bytes\nLargest ptr: %u Bytes\nFreeHunk: %u KBytes\nLargest hunk: %u Bytes_}
 			(MemoryInfo 1)
 			(MemoryInfo 0)
 			(>> (MemoryInfo 3) $0006)

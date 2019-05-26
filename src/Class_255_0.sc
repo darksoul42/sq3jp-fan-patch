@@ -16,8 +16,10 @@
 	local0
 	[local1 20]
 )
-(procedure (proc255_0 param1 &tmp newDialog newDText newDIcon newDEdit temp4 temp5 temp6 temp7 temp8 theNewDialog temp10 temp11 [newDButton 6] temp18 temp19 temp20 [temp21 1000])
-	(= temp11 (GetPort))
+(procedure (proc255_0 param1 &tmp newDialog newDText_2 newDIcon newDEdit temp4 temp5 temp6 temp7 temp8 theNewDialog temp10 activePort [newDButton 6] temp18 temp19 temp20 [tempString 1000] tempStringCounter newDText final_newDText textWithSubtitles gGamePrintLang gGameSubtitleLang dialog_option70 dialog_option82 textShift dialog_option107)
+	(= dialog_option70 0)
+	(= dialog_option82 0)
+	(= dialog_option107 0)
 	(= temp6 (= temp7 -1))
 	(= theNewDialog
 		(= temp8
@@ -35,30 +37,98 @@
 	)
 	(= newDialog (Dialog new:))
 	(= newDText (DText new:))
-	(cond 
-		((u< [param1 0] 1000) (GetFarText [param1 0] [param1 1] @temp21) (= temp5 2))
-		([param1 0] (StrCpy @temp21 [param1 0]) (= temp5 1))
-		(else (= temp21 0) (= temp5 0))
+	; PARSE RESOURCE ARGUMENTS FIRST
+	(cond
+		((u< [param1 0] 1000) (GetFarText [param1 0] [param1 1] @tempString) (= temp5 2))
+		([param1 0] (StrCpy @tempString [param1 0]) (= temp5 1))
+		(else (= tempString 0) (= temp5 0))
 	)
-	(newDText
-		text: @temp21
-		moveTo: 4 4
+	; PARSE JAPANESE
+	(= tempStringCounter 0)
+	(while (StrAt @tempString tempStringCounter)
+		(if
+			(and
+				(== (StrAt @tempString tempStringCounter) 37)
+				(== (StrAt @tempString (+ 1 tempStringCounter)) 74)
+			)
+			(gGame printLang: 1 subtitleLang: 81)
+			(kernel_120 @tempString @temp21 {%J})
+			(gGame
+				printLang: gGamePrintLang
+				subtitleLang: gGameSubtitleLang
+			)
+			(StrAt @tempString tempStringCounter 0)
+			(if (proc999_5 81 gGamePrintLang gGameSubtitleLang)
+				((= newDText (DText new:))
+					text: (+ @tempString 2 tempStringCounter)
+					font: 900
+					name: {jDText}
+				)
+			)
+		)
+		(++ tempStringCounter)
+	)
+	; PUT TEMPSTRING IN newDText
+	((= newDText_2 (DText new:))
+		text: @tempString
 		font: global22
-		setSize:
 	)
-	(newDialog name: {PrintD} add: newDText)
+	; SET FINAL OBJECT BASED ON LANGUAGE
+	(= final_newDText
+		(if (and newDText (== gGamePrintLang 81))
+			newDText
+		else
+			newDText_2
+		)
+	)
+	; SET TEXT TO DISPLAY BASED ON SUBTITLE SETTINGS ?
+	(= textWithSubtitles
+		(cond
+			((== gGameSubtitleLang 81) newDText)
+			(newDText
+				(if gGameSubtitleLang
+					newDText_2
+				else
+					(newDText_2 dispose:)
+					(= newDText_2 0)
+				)
+			)
+		)
+	)
+	(final_newDText name: {PrintD} moveTo: 4 4 setSize:)
+	(if textWithSubtitles
+		(textWithSubtitles
+			setSize:
+			moveTo: (final_newDText nsLeft?) (+ 4 (final_newDText nsBottom?))
+		)
+	        (newDialog add: textWithSubtitles setSize:)
+	)
+; BROWSE ARGUMENTS
 	(= temp5 temp5)
 	(while (< temp5 argc)
 		(switch [param1 temp5]
 			(30
-				(newDText mode: [param1 (++ temp5)])
+				(++ temp5)
+				(if (and newDText_2 (not textWithSubtitles))
+					(newDText_2 mode: [param1 temp5])
+				)
 			)
 			(33
-				(newDText font: [param1 (++ temp5)] setSize: temp8)
+				(++ temp5)
+				(if newDText_2
+					(newDText_2 font: [param1 temp5] setSize: temp8)
+				)
 			)
 			(70
+				(= dialog_option70 1)
 				(= temp8 [param1 (++ temp5)])
-				(newDText setSize: temp8)
+				(final_newDText setSize: temp8)
+				(if textWithSubtitles
+					(textWithSubtitles
+						setSize: temp8
+						moveTo: (final_newDText nsLeft?) (+ 4 (final_newDText nsBottom?))
+					)
+				)
 			)
 			(25
 				(newDialog time: [param1 (++ temp5)])
@@ -71,7 +141,7 @@
 				(= temp7 [param1 (++ temp5)])
 			)
 			(83
-				(Animate (global5 elements?) 0)
+				(Animate (gCast elements?) 0)
 			)
 			(41
 				((= newDEdit (DEdit new:)) text: [param1 (++ temp5)])
@@ -87,6 +157,7 @@
 				(++ temp19)
 			)
 			(82
+				(= dialog_option82 1)
 				(if newDIcon
 					(= temp5 (+ temp5 3))
 				else
@@ -101,20 +172,53 @@
 				(if gTheNewDialog (gTheNewDialog dispose:))
 				(= theNewDialog newDialog)
 			)
+			(93
+				(if gTheNewDialog (gTheNewDialog dispose:))
+				(= theNewDialog newDialog)
+			)
+			(107 (= dialog_option107 1))
 		)
 		(++ temp5)
 	)
+        ; OPTION PROCESSING
+        (if dialog_option107 (= theNewDialog 0))
+        (if
+                (and
+                        (not (if dialog_option70 else dialog_option82))
+                        (> (- (newDialog nsBottom?) (newDialog nsTop?)) 100)
+                )
+                (final_newDText setSize: 300)
+                (if textWithSubtitles
+                        (textWithSubtitles
+                                setSize: 300
+                                moveTo: (final_newDText nsLeft?) (+ 4 (final_newDText nsBottom?))
+                        )
+                )
+        )
+        ; END OF OPTION PROCESSING
 	(if newDIcon
 		(newDIcon moveTo: 4 4)
-		(newDText
-			moveTo: (+ 4 (newDIcon nsRight?)) (newDText nsTop?)
+                (if
+                (or (== final_newDText newDText) (== textWithSubtitles newDText))
+                        (= textShift 8)
+                )
+                (final_newDText
+                        moveTo: (+ 4 (newDIcon nsRight?) textShift) (final_newDText nsTop?)
+                        setSize:
+                )
+                (if textWithSubtitles
+                        (textWithSubtitles
+                                moveTo: (final_newDText nsLeft?) (+ 4 (final_newDText nsBottom?))
+                        )
 		)
 		(newDialog add: newDIcon)
 	)
 	(newDialog setSize:)
 	(if newDEdit
 		(newDEdit
-			moveTo: (newDText nsLeft?) (+ 4 (newDText nsBottom?))
+			moveTo:
+				((if textWithSubtitles else final_newDText) nsLeft?)
+				(+ 4 ((if textWithSubtitles else final_newDText) nsBottom?))
 		)
 		(newDialog add: newDEdit setSize:)
 	)
@@ -133,7 +237,7 @@
 		(++ temp5)
 	)
 	(newDialog setSize: center:)
-	(if (and newDIcon (not (StrLen @temp21)))
+	(if (and newDIcon (not (StrLen @tempString)))
 		(newDIcon
 			moveTo:
 				(/
@@ -151,12 +255,13 @@
 			(if (== -1 temp6) (newDialog nsLeft?) else temp6)
 			(if (== -1 temp7) (newDialog nsTop?) else temp7)
 	)
+	(= activePort (GetPort))
 	(newDialog
 		open: (if (newDialog text?) 4 else 0) (if theNewDialog 15 else -1)
 	)
 	(if theNewDialog
 		(= local0 (GetPort))
-		(SetPort temp11)
+		(SetPort activePort)
 		(return (= gTheNewDialog theNewDialog))
 	)
 	(if
@@ -539,7 +644,7 @@
 			(evMOUSEBUTTON
 				(if (self check: pEvent)
 					(pEvent claimed: 1)
-					(cond 
+					(cond
 						((< (pEvent y?) (+ nsTop 10))
 							(repeat
 								(self retreat: 1)
@@ -674,7 +779,7 @@ code_093c:
 			send     6
 code_094a:
 			pToa     theItem
-			not     
+			not
 			bnt      code_095d
 			ldi      60
 			sat      temp3
@@ -690,7 +795,7 @@ code_0961:
 			sat      temp2
 code_0965:
 			lat      temp2
-			not     
+			not
 			bnt      code_09e5
 			pushi    1
 			pushi    #new
@@ -698,7 +803,7 @@ code_0965:
 			class    Event
 			send     4
 			sat      temp1
-			push    
+			push
 			callk    GlobalToLocal,  2
 			lat      temp3
 			bnt      code_09ac
@@ -707,9 +812,9 @@ code_0965:
 			pushi    0
 			lat      temp1
 			send     4
-			push    
+			push
 			ldi      1
-			eq?     
+			eq?
 			bnt      code_0996
 			pushi    #type
 			pushi    1
@@ -720,7 +825,7 @@ code_0996:
 			lst      temp4
 			pushi    0
 			callk    GetTime,  0
-			eq?     
+			eq?
 			bnt      code_09a6
 			jmp      code_0996
 			jmp      code_0996
@@ -746,10 +851,10 @@ code_09ac:
 code_09c6:
 			lst      temp2
 			ldi      65535
-			eq?     
+			eq?
 			bt       code_09d4
 			pToa     busy
-			not     
+			not
 			bnt      code_0965
 code_09d4:
 			ldi      0
@@ -764,7 +869,7 @@ code_09e5:
 			ldi      0
 			aTop     busy
 			lat      temp2
-			ret     
+			ret
 		)
 	)
 	
@@ -783,8 +888,8 @@ code_09e5:
 	
 	(method (open param1 param2)
 		(if (not window)
-			(if (and (PicNotValid) global5)
-				(Animate (global5 elements?) 0)
+			(if (and (PicNotValid) gCast)
+				(Animate (gCast elements?) 0)
 			)
 			(= window
 				(NewWindow
@@ -907,7 +1012,7 @@ code_09e5:
 		(if
 		(= theTheItem (self firstTrue: #handleEvent pEvent))
 			(EditControl theItem 0)
-			(cond 
+			(cond
 				((theTheItem isType: 3)
 					(if theItem (theItem select: 0))
 					((= theItem theTheItem) select: 1)
@@ -925,7 +1030,7 @@ code_09e5:
 			)
 		else
 			(= theTheItem 0)
-			(cond 
+			(cond
 				(
 					(and
 						(or
