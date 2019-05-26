@@ -26,7 +26,7 @@
 			6
 			(if param1 {SAVE GAME} else {GAME})
 			@temp41
-			(if param1 {Â…Â¼Â…Â®Â…ÃŠÂ…ÃœÂ…ÃÂ…ÃœÂ…Â¦Â…Â»Â…Â¶} else {Â…Â·Â…ÃœÂ…Â®Â…Ã})
+			(if param1 {…¼…®…Ê…Ü…Á…Ü…¦…»…¶} else {…·…Ü…®…Ï})
 			@temp41
 		)
 		(if
@@ -38,17 +38,17 @@
 							33
 							0
 							81
-							{OK%jÂµÂ¯Â¹Â°}
+							{OK%jµ¯¹°}
 							1
 							81
-							{Cancel%j Â·Â¬ÃÂ¾Ã™}
+							{Cancel%j ·¬İ¾Ù}
 							0
 							81
-							{Change Directory%j ÃƒÃÂ¨ÃšÂ¸Ã„Ã˜ Â¦ Â¶Â´Ã™}
+							{Change Directory%j ÃŞ¨Ú¸ÄØ ¦ ¶´Ù}
 							2
 						)
 					else
-						(proc255_0 @temp81 33 0 81 {OK%j ÂµÂ¯Â¹Â°} 1)
+						(proc255_0 @temp81 33 0 81 {OK%j µ¯¹°} 1)
 					)
 				)
 				2
@@ -232,7 +232,7 @@
 					(gCast eachElementDo: #delete)
 					(RestoreGame name temp20 global28)
 				else
-					(proc255_0 994 1 33 0 81 {OK%jÂµÂ¯Â¹Â°} 1)
+					(proc255_0 994 1 33 0 81 {OK%jµ¯¹°} 1)
 					(self setCursor: temp21 (HaveMouse))
 				)
 			)
@@ -249,7 +249,7 @@
 			(if (!= (= temp20 (Save doit: @temp0)) -1)
 				(= temp21 (self setCursor: global21 1))
 				(if (not (SaveGame name temp20 @temp0 global28))
-					(proc255_0 994 0 33 0 81 {OK%jÂµÂ¯Â¹Â°} 1)
+					(proc255_0 994 0 33 0 81 {OK%jµ¯¹°} 1)
 				)
 				(self setCursor: temp21 (HaveMouse))
 			)
