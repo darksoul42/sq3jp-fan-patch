@@ -7,6 +7,10 @@
 (public
 	proc999_0 0
 	proc999_1 1
+	proc999_2 2
+	proc999_3 3
+	proc999_4 4
+	proc999_5 5
 )
 
 (procedure (proc999_0 param1)
@@ -22,6 +26,62 @@
 		(= param1 (+ param1 param2))
 	)
 	(return param1)
+)
+
+(procedure (proc999_2 param1 &tmp temp0)
+	(return
+		(if
+			(or
+				(== argc 1)
+				(< param1 (= temp0 (proc999_2 &rest)))
+			)
+			param1
+		else
+			temp0
+		)
+	)
+)
+
+(procedure (proc999_3 param1 &tmp temp0)
+	(return
+		(if
+			(or
+				(== argc 1)
+				(> param1 (= temp0 (proc999_3 &rest)))
+			)
+			param1
+		else
+			temp0
+		)
+	)
+)
+
+(procedure (proc999_4 param1 param2 param3 param4 param5 param6)
+	(return
+		(if
+			(and
+				(<= param1 (if (< argc 6) (param5 x?) else param5))
+				(<= (if (< argc 6) (param5 x?) else param5) param3)
+			)
+			(if
+			(<= param2 (if (< argc 6) (param5 y?) else param6))
+				(<= (if (< argc 6) (param5 y?) else param6) param4)
+			)
+		else
+			0
+		)
+	)
+)
+
+(procedure (proc999_5 param1 param2 &tmp temp0)
+	(= temp0 0)
+	(while (< temp0 (- argc 1))
+		(if (== param1 [param2 temp0])
+			(return (if param1 else 1))
+		)
+		(++ temp0)
+	)
+	(return 0)
 )
 
 (class Obj
