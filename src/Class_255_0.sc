@@ -52,7 +52,7 @@
 				(== (StrAt @tempString (+ 1 tempStringCounter)) 74)
 			)
 			(gGame printLang: 1 subtitleLang: 81)
-			(kernel_120 @tempString @temp21 {%J})
+			(kernel_120 @tempString @tempString {%J})
 			(gGame
 				printLang: gGamePrintLang
 				subtitleLang: gGameSubtitleLang
