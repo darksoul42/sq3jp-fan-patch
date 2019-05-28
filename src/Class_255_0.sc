@@ -58,6 +58,7 @@
 				subtitleLang: gGameSubtitleLang
 			)
 			(StrAt @tempString tempStringCounter 0)
+			; Check if either gGamePrintLang or gGameSubtitleLang are equal to 81 -> Japanese display
 			(if (proc999_5 81 gGamePrintLang gGameSubtitleLang)
 				((= newDText (DText new:))
 					text: (+ @tempString 2 tempStringCounter)
