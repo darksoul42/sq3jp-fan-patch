@@ -16,7 +16,7 @@
 	local0
 	[local1 20]
 )
-(procedure (proc255_0 param1 &tmp newDialog newDText_2 newDIcon newDEdit temp4 temp5 temp6 temp7 temp8 theNewDialog temp10 activePort [newDButton 6] temp18 temp19 temp20 [tempString 1000] tempStringCounter newDText final_newDText textWithSubtitles gGamePrintLang gGameSubtitleLang dialog_option70 dialog_option82 textShift dialog_option107)
+(procedure (proc255_0 param1 &tmp newDialog newDText_2 newDIcon newDEdit temp4 temp5 temp6 temp7 temp8 theNewDialog temp10 activePort [newDButton 6] temp18 temp19 temp20 [tempString 1001] tempStringCounter newDText final_newDText textWithSubtitles gGamePrintLang gGameSubtitleLang dialog_option70 dialog_option82 textShift dialog_option107)
 	(= dialog_option70 0)
 	(= dialog_option82 0)
 	(= dialog_option107 0)
