@@ -13,7 +13,7 @@
 	)
 	
 	(method (init)
-		(AddMenu { _} {About game%jｹﾞｰﾑ ﾆﾂｲﾃ `^a :Help%jﾍﾙﾌﾟ`#1 :VaporCalc%jVaporCalc`^c :Language%jｹﾞﾝｺﾞ`^l :Subtitles%jｼﾞﾏｸ`^u_})
+		(AddMenu { _} {About game%jｹﾞｰﾑ ﾆﾂｲﾃ `^a :Help%jﾍﾙﾌﾟ`#1 :VaporCalc%jVaporCalc`^c :Language%jｹﾞﾝｺﾞ`^l :Subtitles%jｼﾞﾏｸ`^t_})
 		(AddMenu
 			{ File %j ﾌｧｲﾙ_}
 			{Save Game%jｾｰﾌﾞ ｹﾞｰﾑ`#5 :Restore Game%jﾘｽﾄｱ ｹﾞｰﾑ`#7 :--! :Restart Game%jﾘｽﾀｰﾄ ｹﾞｰﾑ`#9 :Quit%jﾔﾒﾙ`^q_}
@@ -56,7 +56,18 @@
 			(259 (= global251 1))
 			(260
 				(= tempDispLang (gGame printLang?))
+				(proc255_0
+					(Format
+						@temp2
+						{Switch Display Language: %d%j表示言語切替：%d}
+						tempDispLang
+						tempDispLang
+					)
+				)
 				(switch tempDispLang
+					(0
+						(= tempDispLang 1)
+					)
 					(1
 						(= tempDispLang 81)
 					)
@@ -65,10 +76,29 @@
 					)
 				)
 				(gGame printLang: tempDispLang)
+				(proc255_0
+					(Format
+						@temp2
+						{Switched Display Language: %d%j表示言語切替：%d}
+						tempDispLang
+						tempDispLang
+					)
+				)
 			)
 			(261
 				(= tempSubtitles (gGame subtitleLang?))
+				(proc255_0
+					(Format
+						@temp2
+						{Switch Subtitle Language : %d%j字幕言語切替完了：%d}
+						tempSubtitles
+						tempSubtitles
+					)
+				)
 				(switch tempSubtitles
+					(0
+						(= tempSubtitles 1)
+					)
 					(1
 						(= tempSubtitles 81)
 					)
@@ -77,6 +107,14 @@
 					)
 				)
 				(gGame subtitleLang: tempSubtitles)
+				(proc255_0
+					(Format
+						@temp2
+						{Switched Subtitle Language : %d%j字幕言語切替完了：%d}
+						tempSubtitles
+						tempSubtitles
+					)
+				)
 			)
 			(513
 				(if global193 (proc255_0 997 2) else (gGame save:))
