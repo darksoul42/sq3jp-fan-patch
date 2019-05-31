@@ -13,7 +13,7 @@
 	)
 	
 	(method (init)
-		(AddMenu { _} {About game%j¹Þ°Ñ ÆÂ²Ã `^a :Help%jÍÙÌß`#1 :VaporCalc`^c_ :Language%j¹ÞÝºÞ`^l})
+		(AddMenu { _} {About game%j¹Þ°Ñ ÆÂ²Ã `^a :Help%jÍÙÌß`#1 :VaporCalc%jVaporCalc`^c :Language%j¹ÞÝºÞ`^l :Subtitles%j¼ÞÏ¸`^u_})
 		(AddMenu
 			{ File %j Ì§²Ù_}
 			{Save Game%j¾°ÌÞ ¹Þ°Ñ`#5 :Restore Game%jØ½Ä± ¹Þ°Ñ`#7 :--! :Restart Game%jØ½À°Ä ¹Þ°Ñ`#9 :Quit%jÔÒÙ`^q_}
@@ -39,7 +39,7 @@
 		(SetMenu 258 109 'aid')
 	)
 	
-	(method (handleEvent pEvent &tmp temp0 temp1 [temp2 201])
+	(method (handleEvent pEvent &tmp temp0 temp1 [temp2 201] tempDispLang tempSubtitles)
 		(switch (super handleEvent: pEvent (User blocks?))
 			(257
 				(proc255_0
@@ -54,6 +54,30 @@
 			)
 			(258 (proc255_0 997 1 33 3))
 			(259 (= global251 1))
+			(260
+				(= tempDispLang (gGame printLang?))
+				(switch tempDispLang
+					(1
+						(= tempDispLang 81)
+					)
+					(81
+						(= tempDispLang 1)
+					)
+				)
+				(gGame printLang: tempDispLang)
+			)
+			(261
+				(= tempSubtitles (gGame subtitleLang?))
+				(switch tempSubtitles
+					(1
+						(= tempSubtitles 81)
+					)
+					(81
+						(= tempSubtitles 1)
+					)
+				)
+				(gGame subtitleLang: tempSubtitles)
+			)
 			(513
 				(if global193 (proc255_0 997 2) else (gGame save:))
 			)

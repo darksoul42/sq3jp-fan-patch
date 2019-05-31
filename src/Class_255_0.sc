@@ -21,6 +21,8 @@
 	(= dialog_option82 0)
 	(= dialog_option107 0)
 	(= temp6 (= temp7 -1))
+	(= gGamePrintLang (gGame printLang?))
+	(= gGameSubtitleLang (gGame subtitleLang?))
 	(= theNewDialog
 		(= temp8
 			(= temp18 (= newDIcon (= newDEdit (= temp19 0))))
