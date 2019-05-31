@@ -13,20 +13,20 @@
 	)
 	
 	(method (init)
-		(AddMenu { _} {About game`^a :Help`#1 :VaporCalc`^c_})
+		(AddMenu { _} {About game%jｹﾞｰﾑ ﾆﾂｲﾃ `^a :Help%jﾍﾙﾌﾟ`#1 :VaporCalc`^c_ :Language%jｹﾞﾝｺﾞ`^l})
 		(AddMenu
-			{ File_}
-			{Save Game`#5 :Restore Game`#7 :--! :Restart Game`#9 :Quit`^q_}
+			{ File %j ﾌｧｲﾙ_}
+			{Save Game%jｾｰﾌﾞ ｹﾞｰﾑ`#5 :Restore Game%jﾘｽﾄｱ ｹﾞｰﾑ`#7 :--! :Restart Game%jﾘｽﾀｰﾄ ｹﾞｰﾑ`#9 :Quit%jﾔﾒﾙ`^q_}
 		)
 		(AddMenu
-			{ Action_}
-			{Pause Game`^p :Inventory`^I :Retype`#3 :--! :Boss Key`^b_}
+			{ Action %j ｱｸｼｮﾝ_}
+			{Pause Game%jｲﾁｼﾞｷｭｳｼ`^p :Inventory%jｲﾝﾍﾞﾝﾄﾘｰ`^I :Retype%jﾘﾋﾟｰﾄ`#3 :--! :Boss Key%jﾎﾞｽｷｰ`^b_}
 		)
 		(AddMenu
 			{ Speed_}
-			{Change...`^s :--! :Faster`+ :Normal`= :Slower`-_}
+			{Change...%jﾍﾝｺｳｽﾙ`^s :--! :Faster%jﾊﾔｸｽﾙ`+ :Normal%jﾌﾂｳﾉﾊﾔｻ`= :Slower%jｵｿｸｽﾙ`-_}
 		)
-		(AddMenu { Sound_} {Volume...`^v :Sound Off`#2=1_})
+		(AddMenu { Sound_} {Volume...%jｻｳﾝﾄﾞﾁｮｳｾﾂ`^v :Sound Off%jsｸﾝﾄﾞｦｹｽ`#2=1_})
 		(SetMenu 513 109 'save')
 		(SetMenu 514 109 'restore')
 		(SetMenu 516 109 'restart')
@@ -49,7 +49,7 @@
 					30
 					1
 					80
-					{Space Quest }
+					{Space Quest %jｽﾍﾟｰｽ･ｸｴｽﾄ }
 				)
 			)
 			(258 (proc255_0 997 1 33 3))
@@ -64,7 +64,7 @@
 						997
 						3
 						80
-						{Restart}
+						{Restart%jﾘｽﾀｰﾄ}
 						82
 						602
 						1
@@ -72,10 +72,10 @@
 						33
 						300
 						81
-						{Restart}
+						{Restart%jﾘｽﾀｰﾄ}
 						1
 						81
-						{Oops}
+						{Oops%jｲﾏﾉﾅｼ}
 						0
 					)
 					(gGame restart:)
@@ -88,7 +88,7 @@
 							997
 							4
 							80
-							{Bailing Out?}
+							{Bailing Out?%jﾆｹﾞﾙﾉｶ?}
 							82
 							602
 							1
@@ -96,10 +96,10 @@
 							33
 							300
 							81
-							{Quit}
+							{Quit%jﾔﾒﾙ}
 							1
 							81
-							{Oops}
+							{Oops%jｲﾏﾉﾅｼ}
 							0
 						)
 					)
@@ -113,7 +113,7 @@
 					997
 					5
 					80
-					{This game is paused.}
+					{This game is paused.%jｹﾞｰﾑｶﾞｷｭｳｼｼﾃｲﾙ}
 					82
 					602
 					1
@@ -121,7 +121,7 @@
 					33
 					300
 					81
-					{Ok. I'm back.}
+					{Ok. I'm back.%jﾖｼ､ﾓﾄﾞｯﾀ}
 					1
 				)
 				(DoSound sndPAUSE temp0)
@@ -135,7 +135,7 @@
 				(proc255_0
 					(Format
 						@temp2
-						{In fact, you don't want your boss to know that you've been playing Space Quest ]I[ for %d hours, %d minutes and %d seconds.}
+						{In fact, you don't want your boss to know that you've been playing Space Quest ]I[ for %d hours, %d minutes and %d seconds.%j上司にバレたくないだろ、仕事を放り出してスペース・クエスト]I[をプレイしてるなんて。}
 						global228
 						global227
 						global226
