@@ -53,15 +53,19 @@
 				(== (StrAt @tempString tempStringCounter) 37)
 				(== (StrAt @tempString (+ 1 tempStringCounter)) 74)
 			)
+			; Set temporarily print language to English and subtitle language to Japanese
 			(gGame printLang: 1 subtitleLang: 81)
+			; StrSplit http://scicompanion.com/Documentation/Kernels/StrSplit.html since it works based on language
+			; Restore values for print and subtitle language
 			(kernel_120 @tempString @tempString {%J})
-			(gGame
-				printLang: gGamePrintLang
-				subtitleLang: gGameSubtitleLang
-			)
+			(gGame printLang: gGamePrintLang subtitleLang: gGameSubtitleLang)
+			; Replace % from %J with a NUL character to terminate the string
 			(StrAt @tempString tempStringCounter 0)
 			; Check if either gGamePrintLang or gGameSubtitleLang are equal to 81 -> Japanese display
-			(if (proc999_5 81 gGamePrintLang gGameSubtitleLang)
+			(if (or
+				(== 81 gGamePrintLang)
+				(== 81 gGameSubtitleLang)
+			    )
 				((= newDText (DText new:))
 					text: (+ @tempString 2 tempStringCounter)
 					font: 900
