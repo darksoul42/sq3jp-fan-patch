@@ -3,6 +3,7 @@
 (include sci.sh)
 (use Main)
 (use Class_255_0)
+(use n944)
 (use Sound)
 (use User)
 
@@ -23,10 +24,10 @@
 			{Pause Game%jｲﾁｼﾞｷｭｳｼ`^p :Inventory%jｲﾝﾍﾞﾝﾄﾘｰ`^I :Retype%jﾘﾋﾟｰﾄ`#3 :--! :Boss Key%jﾎﾞｽｷｰ`^b_}
 		)
 		(AddMenu
-			{ Speed_}
+			{ Speed%jｽﾋﾟｰﾄﾞ_}
 			{Change...%jﾍﾝｺｳｽﾙ`^s :--! :Faster%jﾊﾔｸｽﾙ`+ :Normal%jﾌﾂｳﾉﾊﾔｻ`= :Slower%jｵｿｸｽﾙ`-_}
 		)
-		(AddMenu { Sound_} {Volume...%jｻｳﾝﾄﾞﾁｮｳｾﾂ`^v :Sound Off%jsｸﾝﾄﾞｦｹｽ`#2=1_})
+		(AddMenu { Sound%jｻｳﾝﾄﾞ_} {Volume...%jｻｳﾝﾄﾞﾁｮｳｾﾂ`^v :Sound Off%jｻｳﾝﾄﾞｦｹｽ`#2=1_})
 		(SetMenu 513 109 'save')
 		(SetMenu 514 109 'restore')
 		(SetMenu 516 109 'restart')
@@ -79,7 +80,7 @@
 				(proc255_0
 					(Format
 						@temp2
-						{Switched Display Language: %d%j表示言語切替：%d}
+						{Switched Display Language: %d%j表示言語切替完了：%d}
 						tempDispLang
 						tempDispLang
 					)
@@ -90,7 +91,7 @@
 				(proc255_0
 					(Format
 						@temp2
-						{Switch Subtitle Language : %d%j字幕言語切替完了：%d}
+						{Switch Subtitle Language : %d%j字幕言語切替：%d}
 						tempSubtitles
 						tempSubtitles
 					)

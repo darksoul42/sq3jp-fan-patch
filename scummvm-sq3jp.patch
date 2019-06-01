@@ -1,0 +1,39 @@
+diff --git a/engines/sci/detection_tables.h b/engines/sci/detection_tables.h
+index dd7a626e12..1f4635c3fe 100644
+--- a/engines/sci/detection_tables.h
++++ b/engines/sci/detection_tables.h
+@@ -4480,6 +4480,19 @@ static const struct ADGameDescription SciGameDescriptions[] = {
+ 		AD_LISTEND},
+ 		Common::EN_ANY, Common::kPlatformDOS, 0, GUIO5(GUIO_NOSPEECH, GAMEOPTION_EGA_UNDITHER, GAMEOPTION_PREFER_DIGITAL_SFX, GAMEOPTION_ORIGINAL_SAVELOAD, GAMEOPTION_FB01_MIDI)	},
+ 
++
++	// Space Quest 3 - Japanese Hack (from darksoul42, testing a Japanese patch)
++	// Game version 1.0P 1989-03-22 + patches
++	// SCI interpreter version 0.000.453
++	{"sq3", "", {
++		{"script.255", 0, "0ffe0d86a0ab4a6f3a7c9f1b16cae36b", 5574},
++		{"resource.map", 0, "876445bb0085a62d5966f4153e2ddf52", 5484},
++		{"resource.001", 0, "ceeda7202b96e5c85ecaa88a40a540fc", 485059},
++		{"resource.002", 0, "ceeda7202b96e5c85ecaa88a40a540fc", 720133},
++		{"resource.003", 0, "ceeda7202b96e5c85ecaa88a40a540fc", 688294},
++		AD_LISTEND},
++		Common::JA_JPN, Common::kPlatformPC98, ADGF_ADDENGLISH, GUIO5(GUIO_NOSPEECH, GAMEOPTION_EGA_UNDITHER, GAMEOPTION_PREFER_DIGITAL_SFX, GAMEOPTION_ORIGINAL_SAVELOAD, GAMEOPTION_FB01_MIDI)	},
++
+ 	// Space Quest 3 - English DOS (from darksoul42, bug report Trac#10245)
+ 	// Game version 1.0P 1989-03-22
+ 	// SCI interpreter version 0.000.453
+diff --git a/engines/sci/engine/state.cpp b/engines/sci/engine/state.cpp
+index f1c656688c..806cde9208 100644
+--- a/engines/sci/engine/state.cpp
++++ b/engines/sci/engine/state.cpp
+@@ -222,6 +222,10 @@ Common::String SciEngine::getSciLanguageString(const Common::String &str, kLangu
+ 		textPtr++;
+ 	}
+ 
++	// Very dirty hack to force display of Japanese
++	warning("Found language: %d, requested language: %d", foundLanguage, requestedLanguage);
++	if (g_sci->getGameId() == GID_SQ3 && foundLanguage == K_LANG_JAPANESE)
++		requestedLanguage = K_LANG_JAPANESE;
+ 	if (foundLanguage == requestedLanguage) {
+ 		if (curChar2 == 'J') {
+ 			// Japanese including Kanji, displayed with system font
