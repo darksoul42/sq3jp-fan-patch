@@ -1,2 +1,3 @@
 # sq3jp
-Space Quest III - SCI Patch for Japanese Translation
+Unofficial SCI patch for Space Quest III: The Pirates of Pestulon, made to run on top of an official release.
+Adds Japanese translation.
