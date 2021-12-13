@@ -1,8 +1,8 @@
 diff --git a/engines/sci/detection_tables.h b/engines/sci/detection_tables.h
-index 22791cea18..9ab74aa51d 100644
+index e501520c7a8..52f78765bf9 100644
 --- a/engines/sci/detection_tables.h
 +++ b/engines/sci/detection_tables.h
-@@ -5179,6 +5179,19 @@ static const struct ADGameDescription SciGameDescriptions[] = {
+@@ -5212,6 +5212,19 @@ static const struct ADGameDescription SciGameDescriptions[] = {
  		AD_LISTEND},
  		Common::EN_ANY, Common::kPlatformDOS, 0, GUIO_STD16_PALETTEMODS	},
  
@@ -23,7 +23,7 @@ index 22791cea18..9ab74aa51d 100644
  	// Game version 1.0P 1989-03-22
  	// SCI interpreter version 0.000.453
 diff --git a/engines/sci/engine/state.cpp b/engines/sci/engine/state.cpp
-index de1f7d34af..8b94e98434 100644
+index d78718036a8..2f69f2281f9 100644
 --- a/engines/sci/engine/state.cpp
 +++ b/engines/sci/engine/state.cpp
 @@ -246,6 +246,10 @@ Common::String SciEngine::getSciLanguageString(const Common::String &str, kLangu
